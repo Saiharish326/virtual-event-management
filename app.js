@@ -11,8 +11,8 @@ const port = 3000;
 const transporter = nodemailer.createTransporter({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER || 'your-email@gmail.com', // Set EMAIL_USER environment variable
-        pass: process.env.EMAIL_PASS || 'your-app-password'     // Set EMAIL_PASS environment variable
+        user: process.env.EMAIL_USER || 'your-email@gmail.com',
+        pass: process.env.EMAIL_PASS || 'your-app-password'
     }
 });
 
@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransporter({
 async function sendEmail(to, subject, htmlContent) {
     try {
         const mailOptions = {
-            from: process.env.EMAIL_USER || 'your-email@gmail.com', // Use environment variable
+            from: process.env.EMAIL_USER || 'your-email@gmail.com',
             to: to,
             subject: subject,
             html: htmlContent
@@ -299,7 +299,13 @@ app.get('/email-status', authenticateToken, checkRole('organizer'), async (req, 
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-    console.log('Email notifications are enabled');
-});
+// Only start server if not in Vercel environment
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+        console.log('Email notifications are enabled');
+    });
+}
+
+// Export for Vercel
+module.exports = app;
