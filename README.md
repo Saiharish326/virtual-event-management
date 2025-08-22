@@ -427,24 +427,6 @@ PORT=3000
 
 This project is licensed under the ISC License.
 
-## 🆘 Support
-
-If you encounter any issues:
-
-1. Check the troubleshooting section
-2. Verify your configuration
-3. Check server logs for errors
-4. Test the email status endpoint
-5. Create an issue with detailed error information
-
-## 🔄 Changelog
-
-### Version 1.0.0
-- Initial release with email notifications
-- User authentication system
-- Event management
-- Gmail SMTP integration
-- Role-based access control
 
 ---
 
